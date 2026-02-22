@@ -1,0 +1,17 @@
+Options -MultiViews
+RewriteEngine On
+
+# CORS (helps preflight OPTIONS reach the API)
+<IfModule mod_headers.c>
+  Header always set Access-Control-Allow-Origin "*"
+  Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+  Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+</IfModule>
+
+# Ensure OPTIONS requests are routed to index.php
+RewriteCond %{REQUEST_METHOD} =OPTIONS
+RewriteRule ^ index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]

@@ -1,0 +1,505 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg-color: #f0f2f5;
+  --sidebar-bg: #ffffff;
+  --header-bg: #f0f2f5;
+  --chat-bg: #efeae2;
+  --primary-color: #00a884;
+  --incoming-msg: #ffffff;
+  --outgoing-msg: #d9fdd3;
+  --border-color: #e9edef;
+  --text-primary: #111b21;
+  --text-secondary: #667781;
+  --teal-header: #008069;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #d1d7db;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  max-width: 1600px;
+  background-color: var(--bg-color);
+  display: flex;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Auth Styling */
+.login-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+}
+
+.auth-form {
+  background: white;
+  padding: 40px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.btn-primary {
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 30%;
+  min-width: 300px;
+  max-width: 450px;
+  height: 100%;
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 10px 16px;
+  background-color: var(--header-bg);
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: #54656f;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+/* Search Bar */
+.search-bar {
+  padding: 7px 10px;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search-input-wrapper {
+  background-color: #F0F2F5;
+  border-radius: 8px;
+  padding: 7px 32px 7px 65px;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #54656f;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+}
+
+.conversation-list {
+  flex: 1;
+  overflow-y: auto;
+  background-color: white;
+}
+
+.conversation-item {
+  height: 72px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.conversation-item:hover,
+.conversation-item.active {
+  background-color: #f0f2f5;
+}
+
+.chat-avatar {
+  margin-right: 15px;
+}
+
+.chat-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid transparent;
+  /* Separator usually */
+  height: 100%;
+  padding-right: 15px;
+}
+
+.chat-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+
+.chat-name {
+  font-size: 17px;
+  color: var(--text-primary);
+}
+
+.chat-date {
+  font-size: 12px;
+  color: #667781;
+}
+
+.chat-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.chat-badges {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.last-message {
+  font-size: 14px;
+  color: #667781;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.unread-badge {
+  background-color: #25d366;
+  color: white;
+  border-radius: 50%;
+  padding: 0 6px;
+  min-width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+}
+
+/* علامة خضراء: عدد الرسائل التي لم يقرأها الطرف الآخر */
+.unread-by-other-badge {
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  padding: 0;
+  min-width: 10px;
+  height: 10px;
+  font-size: 0; /* Just a dot */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  margin-left: 6px;
+  box-shadow: 0 0 5px var(--primary-color);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Chat Window */
+.chat-window {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--chat-bg);
+  background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+  background-repeat: repeat;
+  /* background-size: 400px; */
+  position: relative;
+}
+
+.chat-header {
+  height: 60px;
+  padding: 10px 16px;
+  background-color: var(--header-bg);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.chat-avatar-small {
+  margin-right: 15px;
+}
+
+.chat-header-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header-info h3 {
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.chat-header-info span {
+  font-size: 13px;
+  color: #667781;
+}
+
+.chat-header-actions {
+  color: #54656f;
+  display: flex;
+  gap: 20px;
+  font-size: 1.2rem;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #54656f;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-right: 15px;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .back-btn {
+    display: block;
+  }
+}
+
+/* Messages */
+.messages-container {
+  flex: 1;
+  padding: 20px 60px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.message {
+  max-width: 65%;
+  padding: 6px 7px 8px 9px;
+  border-radius: 7.5px;
+  position: relative;
+  font-size: 14.2px;
+  line-height: 19px;
+  box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-in {
+  align-self: flex-start;
+  background-color: var(--incoming-msg);
+  border-top-left-radius: 0;
+}
+
+.message-out {
+  align-self: flex-end;
+  background-color: var(--outgoing-msg);
+  border-top-right-radius: 0;
+}
+
+.message-meta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: -10px;
+  /* pull up */
+  margin-left: 20px;
+  /* space for text */
+  /* This overlap trick is tricky in pure CSS without float, using flex gap instead */
+  margin-top: 4px;
+  gap: 4px;
+}
+
+.message-time {
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.message-status {
+  font-size: 11px;
+  /* color set inline */
+}
+
+/* Input */
+.input-area {
+  min-height: 62px;
+  padding: 5px 16px;
+  background-color: var(--header-bg);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+}
+
+.input-wrapper {
+  flex: 1;
+  background-color: white;
+  border-radius: 8px;
+  padding: 9px 12px;
+  margin: 5px 10px;
+}
+
+.chat-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.send-btn {
+  background: none;
+  border: none;
+  color: #54656f;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Welcome Screen */
+.welcome-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  border-bottom: 6px solid #25d366;
+}
+
+.welcome-screen h2 {
+  color: #41525d;
+  font-weight: 300;
+  margin-top: 20px;
+}
+
+.welcome-screen p {
+  color: #667781;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* FAB */
+.fab-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  /* relative to sidebar so careful with structure. Sidebar has relative? No. */
+  /* Wait, .sidebar is display:flex col. Ideally FAB is overlay. */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  /* Actually sidebar should be relative to hold this */
+}
+
+.sidebar {
+  position: relative;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+  margin-bottom: 15px;
+  color: var(--text-primary);
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.modal-content button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-content button[type="submit"] {
+  background-color: var(--primary-color);
+  color: white;
+}
